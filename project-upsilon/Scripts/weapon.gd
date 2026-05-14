@@ -5,6 +5,10 @@ extends Node2D
 const BULLET = preload("res://Scenes/bullet.tscn")
 
 @onready var muzzle: Marker2D = $Marker2D
+@export_enum("semi","auto") var firemode: String = "semi"
+
+var can_shoot: bool = true
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,10 +20,23 @@ func _process(delta: float) -> void:
 		scale.y = -1
 	else:
 		scale.y = 1
+			
+	if Input.is_action_just_pressed("shoot") and can_shoot:
+		shoot()
 		
-		
-	if Input.is_action_just_pressed("shoot"):
-		var bullet_instance = BULLET.instantiate()
-		get_tree().root.add_child(bullet_instance)
-		bullet_instance.global_position = muzzle.global_position
-		bullet_instance.rotation = rotation
+	if firemode == "auto":
+		if Input.is_action_pressed("shoot") and can_shoot:
+			shoot()
+
+func shoot() -> void:
+	var bullet_instance = BULLET.instantiate()
+	get_tree().root.add_child(bullet_instance)
+	bullet_instance.global_position = muzzle.global_position
+	bullet_instance.rotation = rotation
+	
+	can_shoot = false
+	$shoot_timer.start(0.2)
+
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true
+	 

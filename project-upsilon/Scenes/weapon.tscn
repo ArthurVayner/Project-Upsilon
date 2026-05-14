@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dxoof781sh65q"]
 
 [ext_resource type="Script" uid="uid://b38f1l6xbvo0r" path="res://Scripts/weapon.gd" id="1_qv81b"]
-[ext_resource type="Texture2D" uid="uid://cst1o3ecynnuq" path="res://Assets/Guns/gun.png" id="2_e1ly8"]
+[ext_resource type="Texture2D" uid="uid://dnhqvvs6n36j3" path="res://Assets/Guns/ak-47.png" id="2_qv81b"]
 
 [node name="Weapon" type="Node2D" unique_id=1965600437]
 position = Vector2(596, 306.00003)
@@ -9,8 +9,13 @@ scale = Vector2(0.5856763, 0.7290264)
 script = ExtResource("1_qv81b")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=387090487]
-position = Vector2(261.23642, 80.929855)
-texture = ExtResource("2_e1ly8")
+position = Vector2(227.08789, -9.601873)
+scale = Vector2(2.2074277, 1.4698296)
+texture = ExtResource("2_qv81b")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1055538772]
-position = Vector2(679.5563, -4.115118)
+position = Vector2(531.0101, -15.088657)
+
+[node name="shoot_timer" type="Timer" parent="." unique_id=1175094652]
+
+[connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
