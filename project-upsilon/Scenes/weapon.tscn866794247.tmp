@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://dxoof781sh65q"]
 
 [ext_resource type="Script" uid="uid://b38f1l6xbvo0r" path="res://Scripts/weapon.gd" id="1_qv81b"]
-[ext_resource type="Texture2D" uid="uid://dkweq7ics88rc" path="res://Assets/Guns/1911.png" id="2_qv81b"]
+[ext_resource type="Texture2D" uid="uid://dnhqvvs6n36j3" path="res://Assets/Guns/ak-47.png" id="2_qv81b"]
 
 [node name="Weapon" type="Node2D" unique_id=1965600437]
+position = Vector2(596, 306.00003)
 script = ExtResource("1_qv81b")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=387090487]

@@ -6,9 +6,10 @@ const BULLET = preload("res://Scenes/bullet.tscn")
 
 @onready var muzzle: Marker2D = $Marker2D
 @export_enum("semi","auto") var firemode: String = "semi"
+@onready var txt = $Sprite2
 
 var can_shoot: bool = true
-
+var fire_rate = 300
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,7 +36,8 @@ func shoot() -> void:
 	bullet_instance.rotation = rotation
 	
 	can_shoot = false
-	$shoot_timer.start(0.2)
+	
+	$shoot_timer.start(1/fire_rate)
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true

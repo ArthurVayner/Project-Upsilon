@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dc1abn8qt64le"]
+
+[ext_resource type="Script" uid="uid://bkn6sxdbpf78i" path="res://Scripts/main.gd" id="1_8gbba"]
+[ext_resource type="PackedScene" uid="uid://0mloevgtfvbg" path="res://Scenes/player.tscn" id="1_bo1nx"]
+
+[node name="Main" type="Node2D" unique_id=628241775]
+script = ExtResource("1_8gbba")
+
+[node name="Player" parent="." unique_id=1872268072 instance=ExtResource("1_bo1nx")]
+
+[node name="ak47" type="Button" parent="." unique_id=217110370]
+offset_right = 8.0
+offset_bottom = 8.0
