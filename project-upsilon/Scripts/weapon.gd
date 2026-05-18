@@ -6,7 +6,7 @@ const BULLET = preload("res://Scenes/bullet.tscn")
 
 @onready var muzzle: Marker2D = $Marker2D
 @export_enum("semi","auto") var firemode: String = "semi"
-@onready var txt = $Sprite2
+
 
 var can_shoot: bool = true
 @export var fire_rate = 3
