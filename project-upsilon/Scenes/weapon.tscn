@@ -4,15 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://dkweq7ics88rc" path="res://Assets/Guns/1911.png" id="2_qv81b"]
 
 [node name="Weapon" type="Node2D" unique_id=1965600437]
+position = Vector2(500, 276)
 script = ExtResource("1_qv81b")
+firemode = "auto"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=387090487]
-position = Vector2(227.08789, -9.601873)
-scale = Vector2(2.2074277, 1.4698296)
+position = Vector2(-1, 0)
 texture = ExtResource("2_qv81b")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1055538772]
-position = Vector2(531.0101, -15.088657)
+position = Vector2(139, -48)
 
 [node name="shoot_timer" type="Timer" parent="." unique_id=1175094652]
 

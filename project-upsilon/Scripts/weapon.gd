@@ -9,7 +9,7 @@ const BULLET = preload("res://Scenes/bullet.tscn")
 @onready var txt = $Sprite2
 
 var can_shoot: bool = true
-var fire_rate = 300
+@export var fire_rate = 3
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,7 +37,7 @@ func shoot() -> void:
 	
 	can_shoot = false
 	
-	$shoot_timer.start(1/fire_rate)
+	$shoot_timer.start(0.1 * fire_rate)
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
