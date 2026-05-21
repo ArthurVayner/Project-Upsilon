@@ -8,9 +8,14 @@ func _physics_process(delta):
 	player_roll()
 	
 	
+	
 func player_move() -> void:
 	var input_direction := Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * SPEED
+	if velocity.x < 0:
+		$Pivot.scale.x = -1
+	elif velocity.x > 0:
+		$Pivot.scale.x = 1
 	move_and_slide()
 	
 func player_roll():

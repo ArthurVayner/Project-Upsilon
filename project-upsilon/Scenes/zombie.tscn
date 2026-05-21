@@ -3,15 +3,34 @@
 [ext_resource type="Texture2D" uid="uid://d07wqe7bnie41" path="res://Assets/Guns/zombie.png" id="1_f50pn"]
 [ext_resource type="Script" uid="uid://cyy8p0t2k1lnl" path="res://Scripts/zombie.gd" id="1_ij6vw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ij6vw"]
-size = Vector2(116, 250)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n70j1"]
+size = Vector2(39, 82)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iyl7r"]
+size = Vector2(104, 233)
 
 [node name="Zombie" type="CharacterBody2D" unique_id=1444083329]
 script = ExtResource("1_ij6vw")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2010522073]
+[node name="Attack_timer" type="Timer" parent="." unique_id=1122252014]
+
+[node name="Pivot" type="Node2D" parent="." unique_id=1802899322]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot" unique_id=2010522073]
 texture = ExtResource("1_f50pn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2000861999]
-position = Vector2(150, -134)
-shape = SubResource("RectangleShape2D_ij6vw")
+[node name="Area2D" type="Area2D" parent="Pivot" unique_id=763195270]
+position = Vector2(193, -116)
+metadata/_edit_group_ = true
+
+[node name="Hands" type="CollisionShape2D" parent="Pivot/Area2D" unique_id=96275660]
+position = Vector2(-128, 74)
+shape = SubResource("RectangleShape2D_n70j1")
+
+[node name="Body" type="CollisionShape2D" parent="." unique_id=248048154]
+position = Vector2(-17, -2.5)
+shape = SubResource("RectangleShape2D_iyl7r")
+
+[connection signal="timeout" from="Attack_timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="Pivot/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Pivot/Area2D" to="." method="_on_area_2d_body_exited"]
