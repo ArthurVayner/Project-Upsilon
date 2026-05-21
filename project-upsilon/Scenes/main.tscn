@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bkn6sxdbpf78i" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://0mloevgtfvbg" path="res://Scenes/player.tscn" id="1_bo1nx"]
-[ext_resource type="PackedScene" uid="uid://dxoof781sh65q" path="res://Scenes/weapon.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://d0i8ukqa6vlhd" path="res://Scenes/zombie.tscn" id="4_jjvhh"]
 
 [node name="Main" type="Node2D" unique_id=628241775]
@@ -11,8 +10,7 @@ script = ExtResource("1_8gbba")
 [node name="Player" parent="." unique_id=1872268072 instance=ExtResource("1_bo1nx")]
 position = Vector2(839, 247)
 
-[node name="Weapon" parent="Player" unique_id=1965600437 instance=ExtResource("3_8gbba")]
-position = Vector2(26.298368, 0)
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1155466659]
 
 [node name="Zombie" parent="." unique_id=1444083329 instance=ExtResource("4_jjvhh")]
 position = Vector2(575, 255)
