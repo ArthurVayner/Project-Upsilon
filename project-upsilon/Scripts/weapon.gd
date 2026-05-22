@@ -2,9 +2,10 @@ extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
-const BULLET = preload("res://Scenes/bullet.tscn")
+const BULLET: PackedScene = preload("uid://c4t4ut4su4pxm")
 
 @onready var muzzle: Marker2D = $Marker2D
+@onready var shoot_timer : Timer = $shoot_timer
 @export_enum("semi","auto") var firemode: String = "semi"
 
 
@@ -33,7 +34,7 @@ func shoot() -> void:
 	
 	can_shoot = false
 	
-	$shoot_timer.start(1 / fire_rate)
+	shoot_timer.start(1 / fire_rate)
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true

@@ -1,11 +1,24 @@
 [gd_scene format=3 uid="uid://dc1abn8qt64le"]
 
-[ext_resource type="Script" uid="uid://bkn6sxdbpf78i" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://0mloevgtfvbg" path="res://Scenes/player.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://d0i8ukqa6vlhd" path="res://Scenes/zombie.tscn" id="4_jjvhh"]
 
+[sub_resource type="GDScript" id="GDScript_bo1nx"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
 [node name="Main" type="Node2D" unique_id=628241775]
-script = ExtResource("1_8gbba")
+script = SubResource("GDScript_bo1nx")
 
 [node name="Player" parent="." unique_id=1872268072 instance=ExtResource("1_bo1nx")]
 position = Vector2(839, 247)

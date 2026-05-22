@@ -3,6 +3,8 @@ extends Node2D
 
 const SPEED: int = 100000
 
+@onready var timer: Timer = $Timer
+
 
 func _process(delta: float) -> void:
 	position += transform.x * SPEED * delta
@@ -10,18 +12,17 @@ func _process(delta: float) -> void:
 #Bullet out of screen
 #=======================================================
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	$Timer.start(2)
+	timer.start(2)
 
 
 func _on_timer_timeout() -> void:
 	queue_free()
-	print("gone")
 
 
 #Bullet hit zombie
 #=====================================================
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "Zombie":
+	if body.scene_file_path == "res://Scenes/zombie.tscn":
 		bullet_hit() 
 		body.queue_free()
 			
