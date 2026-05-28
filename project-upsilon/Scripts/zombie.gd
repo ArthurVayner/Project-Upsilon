@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-var SPEED: int = 100
+var SPEED: float = 100
+var HEALTH: float = 100
+
 
 @onready var player: CharacterBody2D = $"../Player"
 @onready var attack_timer: Timer = $Attack_timer
@@ -9,13 +11,9 @@ var SPEED: int = 100
 var can_attack: bool = true
 var player_in_range: bool = false
 
-
 func _physics_process(delta):
 	#zombie_move()
 	follow_player()
-	
-	
-
 
 #Zombie attack player
 #=======================================================================	

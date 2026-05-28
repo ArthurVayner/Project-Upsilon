@@ -20,8 +20,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass"
 
-[node name="Player" type="CharacterBody2D" unique_id=1872268072]
+[node name="Player" type="CharacterBody2D" unique_id=1872268072 node_paths=PackedStringArray("player")]
 script = ExtResource("1_cvnsp")
+player = NodePath(".")
+gun_hold_distance = 45.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1050866629]
 position = Vector2(-3.5, 4.25)
@@ -32,6 +34,9 @@ shape = SubResource("RectangleShape2D_vgqql")
 [node name="Sprite2D" type="Sprite2D" parent="Pivot" unique_id=1515374129]
 texture = ExtResource("1_onrkg")
 script = SubResource("GDScript_6t5aa")
+
+[node name="GunPivot" type="Marker2D" parent="Pivot" unique_id=549480880]
+position = Vector2(-19, -55)
 
 [node name="Weapon" parent="." unique_id=1965600437 instance=ExtResource("3_6t5aa")]
 position = Vector2(30, -58)

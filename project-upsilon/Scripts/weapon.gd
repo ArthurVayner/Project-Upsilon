@@ -16,10 +16,10 @@ var fire_rate: float = 10
 
 func _process(delta: float) -> void:
 	weapon_rotation()
-			
+	
 	if Input.is_action_just_pressed("shoot") and can_shoot:
 		shoot()
-		
+
 	if firemode == "auto":
 		if Input.is_action_pressed("shoot") and can_shoot:
 			shoot()
@@ -43,7 +43,7 @@ func _on_shoot_timer_timeout() -> void:
 #=================================================================
 func weapon_rotation() -> void:
 	look_at(get_global_mouse_position())
-
+	
 	rotation_degrees = wrap(rotation_degrees,0,360)
 	if rotation_degrees > 90 and rotation_degrees < 270:
 		scale.y = -1
