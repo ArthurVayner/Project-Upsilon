@@ -10,7 +10,7 @@ const BULLET: PackedScene = preload("uid://c4t4ut4su4pxm")
 
 
 var can_shoot: bool = true
-var fire_rate: float = 10 
+var fire_rate: float = 5 
 
 
 

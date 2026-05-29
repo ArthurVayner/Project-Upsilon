@@ -4,12 +4,17 @@ var SPEED: float = 100
 var HEALTH: float = 100
 
 
+
 @onready var player: CharacterBody2D = $"../Player"
 @onready var attack_timer: Timer = $Attack_timer
 @onready var pivot_point: Node2D = $Pivot
+@onready var hp_label: Label = $Label
 
 var can_attack: bool = true
 var player_in_range: bool = false
+
+func _ready() -> void:
+	hp_label.text = "HP " + str(HEALTH)
 
 func _physics_process(delta):
 	#zombie_move()
@@ -41,6 +46,8 @@ func _on_attack_timer_timeout() -> void:
 	can_attack = true
 	if player_in_range:
 		attack()
+		
+#zombie movement
 #=========================================================================
 
 func follow_player() -> void:
@@ -51,4 +58,11 @@ func follow_player() -> void:
 	elif velocity.x > 0:
 		pivot_point.scale.x = 1
 	move_and_slide()
+	
+#zombie dmg
+#===================================================================
+func take_damage(dmg: float) -> void:
+	HEALTH -= dmg
+	if HEALTH <= 0:
+		queue_free()
 	

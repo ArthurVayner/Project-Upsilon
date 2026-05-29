@@ -2,6 +2,7 @@ extends Node2D
 
 
 const SPEED: int = 100000
+var bullet_dmg: float = 34
 
 @onready var timer: Timer = $Timer
 
@@ -23,17 +24,5 @@ func _on_timer_timeout() -> void:
 #=====================================================
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.scene_file_path == "res://Scenes/zombie.tscn":
-		body.HEALTH = bullet_hit(body.HEALTH)
-		if body.HEALTH <= 0:
-			body.queue_free()
-		
-		
-		
-			
-			
-func bullet_hit(health: float) -> float:
-	queue_free()
-	print("Zombie hit")
-	health -= 34
-	return health
-	
+		body.take_damage(bullet_dmg)
+		body.hp_label.text = "HP " + str(body.HEALTH)

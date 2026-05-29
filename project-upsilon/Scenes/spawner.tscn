@@ -8,4 +8,11 @@ script = ExtResource("1_2bop2")
 
 [node name="Timer" type="Timer" parent="." unique_id=180916665]
 
+[node name="Label" type="Label" parent="." unique_id=419350014]
+offset_left = -35.0
+offset_top = -13.0
+offset_right = 42.0
+offset_bottom = 10.0
+text = "SPAWNER"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
