@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var SPEED: float = 100
 var HEALTH: float = 100
+const DAMAGE: int = 50
 
 
 
@@ -17,7 +18,6 @@ func _ready() -> void:
 	hp_label.text = "HP " + str(HEALTH)
 
 func _physics_process(delta):
-	#zombie_move()
 	follow_player()
 
 #Zombie attack player
@@ -39,6 +39,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func attack() -> void:
 	if can_attack:
 		print("hit")
+		player.HEALTH -= DAMAGE
+		player.health_regen()
 	can_attack = false
 	attack_timer.start(1)
 	

@@ -2,6 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://0mloevgtfvbg" path="res://Scenes/player.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cjccm4ui0uikr" path="res://Scenes/spawner.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://dxoof781sh65q" path="res://Scenes/weapon.tscn" id="2_kry3j"]
+[ext_resource type="PackedScene" uid="uid://cgcybwio13410" path="res://Scenes/perks.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://d0i8ukqa6vlhd" path="res://Scenes/zombie.tscn" id="4_jjvhh"]
 
 [sub_resource type="GDScript" id="GDScript_bo1nx"]
 script/source = "extends Node2D
@@ -18,6 +21,9 @@ func _process(delta: float) -> void:
 	pass
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
+size = Vector2(385, 369)
+
 [node name="Main" type="Node2D" unique_id=628241775]
 script = SubResource("GDScript_bo1nx")
 
@@ -25,6 +31,28 @@ script = SubResource("GDScript_bo1nx")
 position = Vector2(839, 247)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1155466659]
+zoom = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="Player/Camera2D" unique_id=940361616]
+offset_left = -642.0
+offset_top = 347.0
+offset_right = -579.0
+offset_bottom = 370.0
+
+[node name="Weapon2" parent="Player" unique_id=1965600437 instance=ExtResource("2_kry3j")]
 
 [node name="spawner" parent="." unique_id=135284612 instance=ExtResource("2_bo1nx")]
-position = Vector2(313, 242)
+position = Vector2(-361, -266)
+spawn_interval = 100000
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=71005758]
+position = Vector2(-50, -133)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1950301966]
+shape = SubResource("RectangleShape2D_bo1nx")
+
+[node name="Perks" parent="." unique_id=945256735 instance=ExtResource("3_8gbba")]
+position = Vector2(1206, 425)
+
+[node name="Zombie" parent="." unique_id=1444083329 instance=ExtResource("4_jjvhh")]
+position = Vector2(-128, 325)

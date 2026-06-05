@@ -1,15 +1,24 @@
 extends CharacterBody2D
 
-var HEALTH: float = 100
-var SPEED: float = 400
+var HEALTH: int = 100
+var MAX_HEALTH: int = 100
+var SPEED: int = 400
 
 @export var player: CharacterBody2D
 @export var gun_hold_distance: float
 
 @onready var pivot_point: Node2D = $Pivot
-@onready var gun: Node2D = $Weapon
+@onready var gun: Node2D = $Weapon2
 @onready var gun_pivot: Marker2D = $Pivot/GunPivot
+@onready var heal_timer: Timer = $Heal_timer
+@onready var hp_label: Label = $Label
 
+func _ready() -> void:
+	hp_label.text = "HP: " + str(HEALTH)
+	
+func _process(delta: float) -> void:
+	hp_label.text = "HP: " + str(HEALTH)
+	
 
 func _physics_process(delta):
 	player_move()
@@ -18,6 +27,9 @@ func _physics_process(delta):
 	weapon_position()
 	
 	
+	
+#Player Movement
+#====================================================================	
 func player_move() -> void:
 	var input_direction := Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * SPEED
@@ -43,3 +55,18 @@ func player_rotation() -> void:
 func weapon_position() -> void:
 	var mouse_direction := gun_pivot.global_position.direction_to(get_global_mouse_position())
 	gun.global_position = gun_pivot.global_position + mouse_direction * gun_hold_distance
+
+#Health
+#==============================================================
+
+
+func health_regen():
+	if HEALTH < MAX_HEALTH:
+		print(HEALTH)
+		heal_timer.start(1)
+		print("func still going")
+
+func _on_heal_timer_timeout() -> void:
+	HEALTH += 10
+	print("timer still going")
+	health_regen()

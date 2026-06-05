@@ -3,9 +3,10 @@ extends Node2D
 @onready var zombie = preload("res://Scenes/zombie.tscn")
 @onready var timer: Timer = $Timer
 
+@export var spawn_interval = 10000 
 
 func _ready() -> void:
-	timer.start(1)
+	timer.start(spawn_interval)
 
 
 

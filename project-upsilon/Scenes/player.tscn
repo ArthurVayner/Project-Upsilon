@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c7amvr4cn2ks2" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://b1sv4vbfyvjoe" path="res://Assets/Guns/Player.png" id="1_onrkg"]
-[ext_resource type="PackedScene" uid="uid://dxoof781sh65q" path="res://Scenes/weapon.tscn" id="3_6t5aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgqql"]
 size = Vector2(45, 242.5)
@@ -38,5 +37,13 @@ script = SubResource("GDScript_6t5aa")
 [node name="GunPivot" type="Marker2D" parent="Pivot" unique_id=549480880]
 position = Vector2(-19, -55)
 
-[node name="Weapon" parent="." unique_id=1965600437 instance=ExtResource("3_6t5aa")]
-position = Vector2(30, -58)
+[node name="Heal_timer" type="Timer" parent="." unique_id=1848193963]
+one_shot = true
+
+[node name="Label" type="Label" parent="." unique_id=570135672]
+offset_left = -64.0
+offset_top = -148.0
+offset_right = 33.0
+offset_bottom = -125.0
+
+[connection signal="timeout" from="Heal_timer" to="." method="_on_heal_timer_timeout"]

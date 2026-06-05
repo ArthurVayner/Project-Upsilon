@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cgcybwio13410"]
+
+[ext_resource type="Script" uid="uid://bvrta60drpwnh" path="res://Scripts/perks.gd" id="1_63a7r"]
+[ext_resource type="Texture2D" uid="uid://870y2d6wnawt" path="res://icon.svg" id="1_75h1h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63a7r"]
+size = Vector2(196, 180)
+
+[sub_resource type="LabelSettings" id="LabelSettings_63a7r"]
+font_size = 25
+
+[node name="Perks" type="Node2D" unique_id=945256735]
+script = ExtResource("1_63a7r")
+perk = 1
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1579469991]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1780825842]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_63a7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=681197331]
+texture = ExtResource("1_75h1h")
+
+[node name="Label" type="Label" parent="." unique_id=2109149013]
+visible = false
+offset_left = -113.0
+offset_top = 75.0
+offset_right = 119.0
+offset_bottom = 157.0
+text = "Press F to interact"
+label_settings = SubResource("LabelSettings_63a7r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
