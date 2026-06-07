@@ -53,4 +53,7 @@ zoom = Vector2(0.75, 0.75)
 [node name="Weapon" parent="." unique_id=1965600437 instance=ExtResource("3_6t5aa")]
 position = Vector2(28, -52)
 
+[node name="Roll_timer" type="Timer" parent="." unique_id=40445337]
+
 [connection signal="timeout" from="Heal_timer" to="." method="_on_heal_timer_timeout"]
+[connection signal="timeout" from="Roll_timer" to="." method="_on_roll_timer_timeout"]

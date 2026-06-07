@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dc1abn8qt64le"]
+
+[ext_resource type="PackedScene" uid="uid://0mloevgtfvbg" path="res://Scenes/player.tscn" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cjccm4ui0uikr" path="res://Scenes/spawner.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cgcybwio13410" path="res://Scenes/perks.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://d0i8ukqa6vlhd" path="res://Scenes/zombie.tscn" id="4_jjvhh"]
+
+[sub_resource type="GDScript" id="GDScript_bo1nx"]
+script/source = "extends Node2D
+
+@onready var player = preload(\"res://Scenes/player.tscn\")
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var new_player = player.instantiate()
+	new_player.global_position = global_position
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
+size = Vector2(385, 369)
+
+[node name="Main" type="Node2D" unique_id=628241775]
+script = SubResource("GDScript_bo1nx")
+
+[node name="Player" parent="." unique_id=1872268072 instance=ExtResource("1_bo1nx")]
+position = Vector2(364, -137)
+
+[node name="spawner" parent="." unique_id=135284612 instance=ExtResource("2_bo1nx")]
+position = Vector2(-361, -266)
+spawn_interval = 10000
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=71005758]
+position = Vector2(-50, -133)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1950301966]
+shape = SubResource("RectangleShape2D_bo1nx")
+
+[node name="Perks" parent="." unique_id=945256735 instance=ExtResource("3_8gbba")]
+position = Vector2(1206, 425)
+perk = 0
+
+[node name="Zombie" parent="." unique_id=1444083329 instance=ExtResource("4_jjvhh")]
+position = Vector2(-355, -119)

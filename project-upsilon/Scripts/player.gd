@@ -6,7 +6,7 @@ var MAX_HEALTH: int = 100
 var SPEED: int = 400
 
 #actions
-
+var can_roll: bool = true
 @export var player: CharacterBody2D
 @export var gun_hold_distance: float
 
@@ -15,6 +15,7 @@ var SPEED: int = 400
 @onready var heal_timer: Timer = $Heal_timer
 @onready var hp_label: Label = $HP
 @onready var weapon: Node2D = $Weapon
+@onready var roll_timer: Timer = $Roll_timer
 
 func _ready() -> void:
 	hp_label.text = "HP: " + str(HEALTH)
@@ -40,10 +41,18 @@ func player_move() -> void:
 	move_and_slide()
 	
 func player_roll():
+	var roll_force = 200
+	var tween = get_tree().create_tween()
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	if Input.is_action_just_pressed("roll"):
-		velocity = input_direction * SPEED * 15
-		move_and_slide()
+	var position_to_roll = global_position + input_direction * roll_force
+
+	if Input.is_action_just_pressed("roll") and can_roll:
+		can_roll = false
+		tween.tween_property(self,"global_position", position_to_roll, 0.1)
+		roll_timer.start(0.5)
+		
+func _on_roll_timer_timeout() -> void:
+	can_roll = true	
 		
 func player_rotation() -> void:
 	var mouse_position = get_global_mouse_position()

@@ -20,5 +20,13 @@ one_shot = true
 position = Vector2(60, 0)
 target_position = Vector2(1000, 0)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2127196945]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1616260046]
+offset_left = 22.0
+offset_top = 544.0
+offset_right = 161.0
+offset_bottom = 567.0
+
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]

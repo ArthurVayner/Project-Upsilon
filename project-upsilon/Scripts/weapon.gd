@@ -5,6 +5,7 @@ class_name Weapon
 @onready var shoot_timer : Timer = $shoot_timer
 @onready var reload_timer : Timer = $reload_timer
 @onready var ray_cast: RayCast2D = $RayCast2D
+@onready var ammo_label: Label = $CanvasLayer/Label
 
 
 @export_enum("semi","auto") var firemode: String = "semi"
@@ -19,6 +20,7 @@ var weapon_dmg: int = 34
 
 func _ready() -> void:
 	current_ammo = max_ammo
+	ammo_label.text = str(current_ammo) + "/" + str(max_ammo)
 	
 
 func _process(delta: float) -> void:
@@ -46,6 +48,7 @@ func shoot() -> void:
 				collider.hp_label.text = "HP " + str(collider.HEALTH)
 		can_shoot = false
 		current_ammo -= 1
+		ammo_label.text = str(current_ammo) + "/" + str(max_ammo)
 		shoot_timer.start(1 / fire_rate)
 	else:
 		reload()
@@ -63,6 +66,7 @@ func _on_reload_timer_timeout() -> void:
 		current_ammo = max_ammo
 		can_shoot = true
 		reloading = false
+		ammo_label.text = str(current_ammo) + "/" + str(max_ammo)
 		
 	
 #Weapon rotation

@@ -10,6 +10,7 @@ const stamina_perk_speed: int = 1000
 const health_perk_bonus: int = 300
 
 var can_buy: bool = false
+var has_perk: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,19 +20,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if can_buy and Input.is_action_just_pressed("interact"):
+	if can_buy and Input.is_action_just_pressed("interact") and not has_perk:
 		buy_perk()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and not has_perk:
 		can_buy = true
 		label.visible = true
 		
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.scene_file_path == "res://Scenes/player.tscn":
+	if body is Player:
 		label.visible = false
 		can_buy = false
 		
@@ -49,3 +50,5 @@ func buy_perk():
 			print("fire rate + dmg")
 		_:
 			print("not working")
+	has_perk = true
+	

@@ -29,12 +29,12 @@ func _physics_process(delta):
 	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
+	if body is Player:
 		player_in_range = true
 		attack()
 	
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.name == "Player":
+	if body is Player:
 		player_in_range = false
 		attack_timer.stop()
 		can_attack = true
@@ -67,6 +67,7 @@ func follow_player() -> void:
 #zombie dmg
 #===================================================================
 func take_damage(dmg: float) -> void:
+	var tween = get_tree().create_tween()
 	HEALTH -= dmg
 	if HEALTH <= 0:
 		queue_free()
