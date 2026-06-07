@@ -1,13 +1,12 @@
 extends Node2D
 
+class_name Weapon
 
-# Called when the node enters the scene tree for the first time.
-const BULLET: PackedScene = preload("uid://c4t4ut4su4pxm")
-
-@onready var muzzle: Marker2D = $Marker2D
 @onready var shoot_timer : Timer = $shoot_timer
 @onready var reload_timer : Timer = $reload_timer
-@onready var ammo_label: Label = $"../Camera2D/Label"
+@onready var ray_cast: RayCast2D = $RayCast2D
+
+
 @export_enum("semi","auto") var firemode: String = "semi"
 
 
@@ -16,15 +15,16 @@ var reloading: bool = false
 var fire_rate: float = 5 
 var max_ammo: int = 10
 var current_ammo: int = 0
+var weapon_dmg: int = 34
 
 func _ready() -> void:
 	current_ammo = max_ammo
+	
 
 func _process(delta: float) -> void:
 	weapon_rotation()
-	ammo_label.text = str(current_ammo) + " / " + str(max_ammo)
+	#ammo_label.text = str(current_ammo) + " / " + str(max_ammo)
 	
-		
 	if Input.is_action_just_pressed("shoot") and can_shoot and not reloading:
 		shoot()
 
@@ -39,12 +39,13 @@ func _process(delta: float) -> void:
 #===============================================================
 func shoot() -> void:
 	if current_ammo > 0:
+		if ray_cast.is_colliding():
+			var collider = ray_cast.get_collider()
+			if collider is Zombie:
+				collider.take_damage(weapon_dmg)
+				collider.hp_label.text = "HP " + str(collider.HEALTH)
 		can_shoot = false
-		var bullet_instance = BULLET.instantiate()
 		current_ammo -= 1
-		get_tree().root.add_child(bullet_instance)
-		bullet_instance.global_position = muzzle.global_position
-		bullet_instance.rotation_degrees = rotation_degrees
 		shoot_timer.start(1 / fire_rate)
 	else:
 		reload()
@@ -74,4 +75,4 @@ func weapon_rotation() -> void:
 		scale.y = -1
 	else:
 		scale.y = 1
-	 
+	

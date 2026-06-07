@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Zombie
+
 var SPEED: float = 100
 var HEALTH: float = 100
 const DAMAGE: int = 50
@@ -19,6 +21,7 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	follow_player()
+	
 
 #Zombie attack player
 #=======================================================================	

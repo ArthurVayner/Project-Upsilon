@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Project upsilon"
+run/main_scene="uid://dc1abn8qt64le"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 

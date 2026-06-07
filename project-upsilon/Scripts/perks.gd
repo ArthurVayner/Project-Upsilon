@@ -6,7 +6,7 @@ extends Node2D
 enum PERK_TYPE {HP, Stamina, Reload, DMG}
 @export var perk : PERK_TYPE
 
-const stamina_perk_speed: int = 100
+const stamina_perk_speed: int = 1000
 const health_perk_bonus: int = 300
 
 var can_buy: bool = false
@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.scene_file_path == "res://Scenes/player.tscn":
+	if body is Player:
 		can_buy = true
 		label.visible = true
 		
@@ -40,6 +40,7 @@ func buy_perk():
 	match perk:
 		PERK_TYPE.HP:
 			player.HEALTH += health_perk_bonus
+			player.MAX_HEALTH += health_perk_bonus
 		PERK_TYPE.Stamina:
 			player.SPEED += stamina_perk_speed
 		PERK_TYPE.Reload:

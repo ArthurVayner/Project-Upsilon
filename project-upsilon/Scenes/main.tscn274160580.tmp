@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://0mloevgtfvbg" path="res://Scenes/player.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cjccm4ui0uikr" path="res://Scenes/spawner.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://dxoof781sh65q" path="res://Scenes/weapon.tscn" id="2_kry3j"]
 [ext_resource type="PackedScene" uid="uid://cgcybwio13410" path="res://Scenes/perks.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://d0i8ukqa6vlhd" path="res://Scenes/zombie.tscn" id="4_jjvhh"]
 
@@ -28,6 +29,17 @@ script = SubResource("GDScript_bo1nx")
 
 [node name="Player" parent="." unique_id=1872268072 instance=ExtResource("1_bo1nx")]
 position = Vector2(364, -137)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1155466659]
+zoom = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="Player/Camera2D" unique_id=940361616]
+offset_left = -642.0
+offset_top = 347.0
+offset_right = -579.0
+offset_bottom = 370.0
+
+[node name="Weapon2" parent="Player" unique_id=1965600437 instance=ExtResource("2_kry3j")]
 
 [node name="spawner" parent="." unique_id=135284612 instance=ExtResource("2_bo1nx")]
 position = Vector2(-361, -266)

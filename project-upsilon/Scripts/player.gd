@@ -1,20 +1,24 @@
 extends CharacterBody2D
-
+class_name Player
+#stats
 var HEALTH: int = 100
 var MAX_HEALTH: int = 100
 var SPEED: int = 400
+
+#actions
 
 @export var player: CharacterBody2D
 @export var gun_hold_distance: float
 
 @onready var pivot_point: Node2D = $Pivot
-@onready var gun: Node2D = $Weapon2
 @onready var gun_pivot: Marker2D = $Pivot/GunPivot
 @onready var heal_timer: Timer = $Heal_timer
-@onready var hp_label: Label = $Label
+@onready var hp_label: Label = $HP
+@onready var weapon: Node2D = $Weapon
 
 func _ready() -> void:
 	hp_label.text = "HP: " + str(HEALTH)
+
 	
 func _process(delta: float) -> void:
 	hp_label.text = "HP: " + str(HEALTH)
@@ -54,7 +58,7 @@ func player_rotation() -> void:
 #===========================================================
 func weapon_position() -> void:
 	var mouse_direction := gun_pivot.global_position.direction_to(get_global_mouse_position())
-	gun.global_position = gun_pivot.global_position + mouse_direction * gun_hold_distance
+	weapon.global_position = gun_pivot.global_position + mouse_direction * gun_hold_distance
 
 #Health
 #==============================================================
