@@ -1,39 +1,42 @@
 extends Node2D
-
 class_name Weapon
 
+#Nodes
 @onready var shoot_timer : Timer = $shoot_timer
 @onready var reload_timer : Timer = $reload_timer
 @onready var ray_cast: RayCast2D = $RayCast2D
-@onready var ammo_label: Label = $CanvasLayer/Label
+@onready var ammo_label: Label = $CanvasLayer/ammo_label
 
+#Stats
+enum FIREMODE {AUTO, SEMI, BURST}
+@export var firemode : FIREMODE
+@export var fire_rate: float
+@export var max_ammo: int
+var current_ammo: int
+@export var weapon_dmg: int
 
-@export_enum("semi","auto") var firemode: String = "semi"
-
-
+#Action
 var can_shoot: bool = true
 var reloading: bool = false
-var fire_rate: float = 5 
-var max_ammo: int = 10
-var current_ammo: int = 0
-var weapon_dmg: int = 34
 
 func _ready() -> void:
 	current_ammo = max_ammo
 	ammo_label.text = str(current_ammo) + "/" + str(max_ammo)
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	weapon_rotation()
-	#ammo_label.text = str(current_ammo) + " / " + str(max_ammo)
 	
 	if Input.is_action_just_pressed("shoot") and can_shoot and not reloading:
-		shoot()
+		if firemode == FIREMODE.SEMI:
+			shoot()
+		elif firemode == FIREMODE.BURST:
+			pass #burst logic
 
-	if firemode == "auto":
+	if firemode == FIREMODE.AUTO:
 		if Input.is_action_pressed("shoot") and can_shoot and not reloading:
 			shoot()
-			
+
 	if Input.is_action_just_pressed("reload") and current_ammo < max_ammo:
 		reload()
 
@@ -54,20 +57,21 @@ func shoot() -> void:
 		reload()
 
 		
-func reload():
+func reload() -> void:
 	reloading = true
 	reload_timer.start(2)
 	
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
-	
+
 func _on_reload_timer_timeout() -> void:
 		current_ammo = max_ammo
 		can_shoot = true
 		reloading = false
 		ammo_label.text = str(current_ammo) + "/" + str(max_ammo)
-		
+
+
 	
 #Weapon rotation
 #=================================================================

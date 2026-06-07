@@ -17,13 +17,12 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass"
+func _process(_delta: float) -> void:
+	pass
+"
 
-[node name="Player" type="CharacterBody2D" unique_id=1872268072 node_paths=PackedStringArray("player")]
+[node name="Player" type="CharacterBody2D" unique_id=1872268072 groups=["PlayerGroup"]]
 script = ExtResource("1_cvnsp")
-player = NodePath(".")
-gun_hold_distance = 45.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1050866629]
 position = Vector2(-3.5, 4.25)
@@ -39,7 +38,6 @@ script = SubResource("GDScript_6t5aa")
 position = Vector2(-19, -55)
 
 [node name="Heal_timer" type="Timer" parent="." unique_id=1848193963]
-one_shot = true
 
 [node name="HP" type="Label" parent="." unique_id=570135672]
 offset_left = -64.0
@@ -52,6 +50,7 @@ zoom = Vector2(0.75, 0.75)
 
 [node name="Weapon" parent="." unique_id=1965600437 instance=ExtResource("3_6t5aa")]
 position = Vector2(28, -52)
+firemode = 0
 
 [node name="Roll_timer" type="Timer" parent="." unique_id=40445337]
 

@@ -5,7 +5,10 @@
 
 [node name="Weapon" type="Node2D" unique_id=1965600437]
 script = ExtResource("1_qv81b")
-firemode = "auto"
+firemode = 1
+fire_rate = 5.0
+max_ammo = 10
+weapon_dmg = 34
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=387090487]
 position = Vector2(-1, 0)
@@ -22,7 +25,7 @@ target_position = Vector2(1000, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2127196945]
 
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=1616260046]
+[node name="ammo_label" type="Label" parent="CanvasLayer" unique_id=1616260046]
 offset_left = 22.0
 offset_top = 544.0
 offset_right = 161.0
