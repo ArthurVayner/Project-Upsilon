@@ -14,9 +14,9 @@ weapon_dmg = 34
 position = Vector2(-1, 0)
 texture = ExtResource("2_qv81b")
 
-[node name="shoot_timer" type="Timer" parent="." unique_id=1175094652]
+[node name="ShootTimer" type="Timer" parent="." unique_id=1175094652]
 
-[node name="reload_timer" type="Timer" parent="." unique_id=1118644624]
+[node name="ReloadTimer" type="Timer" parent="." unique_id=1118644624]
 one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1762559189]
@@ -25,11 +25,11 @@ target_position = Vector2(1000, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2127196945]
 
-[node name="ammo_label" type="Label" parent="CanvasLayer" unique_id=1616260046]
+[node name="AmmoLabel" type="Label" parent="CanvasLayer" unique_id=1616260046]
 offset_left = 22.0
 offset_top = 544.0
 offset_right = 161.0
 offset_bottom = 567.0
 
-[connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
-[connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

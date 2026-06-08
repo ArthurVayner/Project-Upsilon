@@ -7,8 +7,8 @@ var player: Player = null
 #Stats
 enum PERK_TYPE {HP, Stamina, Reload, DMG}
 @export var perk : PERK_TYPE
-const stamina_perk_speed: int = 1000
-const health_perk_bonus: int = 300
+const STAMINA_PERK_SPEED: int = 1000
+const HEALTH_PERK_BONUS: int = 300
 
 #Actions
 var can_buy: bool = false
@@ -42,10 +42,10 @@ func buy_perk() -> void:
 	can_buy = false
 	match perk:
 		PERK_TYPE.HP:
-			player.MAX_HEALTH += health_perk_bonus
-			player.HEALTH += health_perk_bonus
+			player.max_health += HEALTH_PERK_BONUS
+			player.health += HEALTH_PERK_BONUS
 		PERK_TYPE.Stamina:
-			player.SPEED += stamina_perk_speed
+			player.SPEED += STAMINA_PERK_SPEED
 		PERK_TYPE.Reload:
 			print("reload speed")
 		PERK_TYPE.DMG:

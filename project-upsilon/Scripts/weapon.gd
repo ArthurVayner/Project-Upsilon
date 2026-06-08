@@ -2,10 +2,10 @@ extends Node2D
 class_name Weapon
 
 #Nodes
-@onready var shoot_timer : Timer = $shoot_timer
-@onready var reload_timer : Timer = $reload_timer
+@onready var shoot_timer : Timer = $ShootTimer
+@onready var reload_timer : Timer = $ReloadTimer
 @onready var ray_cast: RayCast2D = $RayCast2D
-@onready var ammo_label: Label = $CanvasLayer/ammo_label
+@onready var ammo_label: Label = $CanvasLayer/AmmoLabel
 
 #Stats
 enum FIREMODE {AUTO, SEMI, BURST}
@@ -48,7 +48,6 @@ func shoot() -> void:
 			var collider = ray_cast.get_collider()
 			if collider is Zombie:
 				collider.take_damage(weapon_dmg)
-				collider.hp_label.text = "HP " + str(collider.HEALTH)
 		can_shoot = false
 		current_ammo -= 1
 		ammo_label.text = str(current_ammo) + "/" + str(max_ammo)

@@ -1,31 +1,37 @@
 extends CharacterBody2D
 class_name Player
 #Stats
-var HEALTH: int = 100
-var MAX_HEALTH: int = 100
+var health: int = 100
+var max_health: int = 100
 var SPEED: int = 400
-const regen_amount: int = 10
-const zombie_dmg: int = 50
+const REGEN_AMOUNT: int = 10
+const ZOMBIE_DMG: int = 50
 
 
 #Actions
 var can_roll: bool = true
-const gun_hold_distance: float = 45
+var can_throw_nade: bool = true
+const GRENADE_INTERVAL: int = 1
+const GUN_HOLD_DISTANCE: float = 45
+
 
 #Nodes
 @onready var pivot_point: Node2D = $Pivot
 @onready var gun_pivot: Marker2D = $Pivot/GunPivot
-@onready var heal_timer: Timer = $Heal_timer
 @onready var hp_label: Label = $HP
-@onready var weapon: Node2D = $Weapon
-@onready var roll_timer: Timer = $Roll_timer
+@onready var weapon: Weapon = $Weapon
+const GRENADE = preload("res://Scenes/grenade.tscn")
+@onready var heal_timer: Timer = $HealTimer
+@onready var roll_timer: Timer = $RollTimer
+@onready var grenade_timer: Timer = $GrenadeTimer
+
 
 func _ready() -> void:
-	hp_label.text = "HP: " + str(HEALTH)
+	hp_label.text = "HP: " + str(health)
 	
 
 func _process(_delta) -> void:
-	hp_label.text = "HP: " + str(HEALTH)
+	hp_label.text = "HP: " + str(health)
 	
 	
 func _physics_process(_delta) -> void:
@@ -33,6 +39,7 @@ func _physics_process(_delta) -> void:
 	player_roll()
 	player_rotation()
 	weapon_position()
+	throw_grenade()
 
 #===========================================================
 #Player Movement
@@ -70,15 +77,15 @@ func player_rotation() -> void:
 #===========================================================
 func weapon_position() -> void:
 	var mouse_direction := gun_pivot.global_position.direction_to(get_global_mouse_position())
-	weapon.global_position = gun_pivot.global_position + mouse_direction * gun_hold_distance
+	weapon.global_position = gun_pivot.global_position + mouse_direction * GUN_HOLD_DISTANCE
 
 #==============================================================
-#Health
+#health
 #==============================================================
 
 func health_regen() -> void:
-	if HEALTH < MAX_HEALTH:
-		HEALTH += regen_amount
+	if health < max_health:
+		health += REGEN_AMOUNT
 	else:
 		heal_timer.stop()
 
@@ -89,5 +96,24 @@ func _on_heal_timer_timeout() -> void:
 #=========================================================================
 
 func take_damage() -> void:
-	HEALTH -= zombie_dmg
+	health -= ZOMBIE_DMG
 	heal_timer.start(1)
+	
+#=========================================================================
+#Throw grenade
+#=========================================================================
+func throw_grenade() -> void:
+	if Input.is_action_just_pressed("grenade") and can_throw_nade:
+		var new_grenade = GRENADE.instantiate() as RigidBody2D
+		new_grenade.global_position = global_position
+		get_parent().add_child(new_grenade)
+		var throw_direction = global_position.direction_to(get_global_mouse_position())
+		var throw_force = 1500
+		new_grenade.apply_central_impulse(throw_direction * throw_force)
+		weapon.visible = false
+		can_throw_nade = false
+		grenade_timer.start(1)
+
+func _on_grenade_timer_timeout() -> void:
+	can_throw_nade = true
+	weapon.visible = true

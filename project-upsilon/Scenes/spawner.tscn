@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bkpn0mlggp8e7" path="res://Scripts/spawner.gd" id="1_2bop2"]
 
-[node name="spawner" type="Node2D" unique_id=135284612]
+[node name="Spawner" type="Node2D" unique_id=135284612]
 script = ExtResource("1_2bop2")
 spawn_interval = 10
 

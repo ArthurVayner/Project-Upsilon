@@ -2,13 +2,13 @@ extends CharacterBody2D
 class_name Zombie
 
 #Stats
-var SPEED: float = 100
-var HEALTH: float = 100
+var speed: float = 100
+var health: float = 100
 const DAMAGE: int = 50
 
 #Nodes
 var player: Player = null
-@onready var attack_timer: Timer = $Attack_timer
+@onready var attack_timer: Timer = $AttackTimer
 @onready var pivot_point: Node2D = $Pivot
 @onready var hp_label: Label = $Label
 
@@ -17,7 +17,7 @@ var can_attack: bool = true
 var player_in_range: bool = false
 
 func _ready() -> void:
-	hp_label.text = "HP " + str(HEALTH)
+	hp_label.text = "HP " + str(health)
 
 	var player_group = get_tree().get_nodes_in_group("PlayerGroup")
 	if player_group.size() > 0:
@@ -59,7 +59,7 @@ func _on_attack_timer_timeout() -> void:
 func follow_player() -> void:
 	if player:
 		var direction = (player.position - position).normalized()
-		velocity = direction * SPEED
+		velocity = direction * speed
 		if velocity.x < 0:
 			pivot_point.scale.x = -1
 		elif velocity.x > 0:
@@ -70,7 +70,8 @@ func follow_player() -> void:
 #zombie Take DMG
 #===================================================================
 func take_damage(dmg: float) -> void:
-	HEALTH -= dmg
-	if HEALTH <= 0:
+	health -= dmg
+	hp_label.text = "HP " + str(health)
+	if health <= 0:
 		queue_free()
 	

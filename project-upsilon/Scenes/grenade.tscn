@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://btmndhk3bcmtn"]
+
+[ext_resource type="Script" uid="uid://cwxophdvexhyd" path="res://Scripts/grenade.gd" id="1_5rnft"]
+[ext_resource type="Texture2D" uid="uid://c3u6wtd1qn0ew" path="res://Assets/grenade.png" id="2_5rnft"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_20vs5"]
+radius = 563.64264
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5rnft"]
+radius = 9.0
+
+[node name="Grenade" type="RigidBody2D" unique_id=1283798621]
+script = ExtResource("1_5rnft")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1595203536]
+texture = ExtResource("2_5rnft")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1031440061]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=231772975]
+shape = SubResource("CircleShape2D_20vs5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1118895138]
+position = Vector2(-3, -5)
+shape = SubResource("CircleShape2D_5rnft")
+disabled = true
+
+[node name="ExplodeTimer" type="Timer" parent="." unique_id=1845416672]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]
