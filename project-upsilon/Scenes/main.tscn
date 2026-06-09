@@ -41,7 +41,7 @@ shape = SubResource("RectangleShape2D_bo1nx")
 
 [node name="Perks" parent="." unique_id=945256735 instance=ExtResource("3_8gbba")]
 position = Vector2(1206, 425)
-perk = 0
+perk = 3
 
 [node name="Zombie" parent="." unique_id=1444083329 instance=ExtResource("4_jjvhh")]
 position = Vector2(-355, -119)

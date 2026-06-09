@@ -25,6 +25,9 @@ const GRENADE = preload("res://Scenes/grenade.tscn")
 @onready var roll_timer: Timer = $RollTimer
 @onready var grenade_timer: Timer = $GrenadeTimer
 
+#Items
+@onready var perks: Array[String] = []
+
 
 func _ready() -> void:
 	hp_label.text = "HP: " + str(health)

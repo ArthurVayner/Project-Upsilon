@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name Perk
 #Nodes
 @onready var label = $Label
 var player: Player = null
@@ -44,12 +44,17 @@ func buy_perk() -> void:
 		PERK_TYPE.HP:
 			player.max_health += HEALTH_PERK_BONUS
 			player.health += HEALTH_PERK_BONUS
+			player.perks.append("HP")
 		PERK_TYPE.Stamina:
 			player.SPEED += STAMINA_PERK_SPEED
+			player.perks.append("STAMINA")
 		PERK_TYPE.Reload:
-			print("reload speed")
+			player.weapon.reload_speed /= 2
+			player.perks.append("RELOAD")
 		PERK_TYPE.DMG:
-			print("fire rate + dmg")
+			player.weapon.fire_rate /= 2
+			player.weapon.weapon_dmg *= 2
+			player.perks.append("DMG")
 		_:
 			print("not working")
 	has_perk = true

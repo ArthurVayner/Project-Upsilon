@@ -5,10 +5,6 @@
 
 [node name="Weapon" type="Node2D" unique_id=1965600437]
 script = ExtResource("1_qv81b")
-firemode = 1
-fire_rate = 5.0
-max_ammo = 10
-weapon_dmg = 34
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=387090487]
 position = Vector2(-1, 0)
