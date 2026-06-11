@@ -8,7 +8,7 @@ var player: Player = null
 
 #Stats
 enum PERK_TYPE {HP, Stamina, Reload, DMG}
-@export var perk : PERK_TYPE
+@export var perk_type : PERK_TYPE
 const STAMINA_PERK_SPEED: int = 1000
 const HEALTH_PERK_BONUS: int = 300
 var price: int
@@ -51,31 +51,13 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func buy_perk() -> void:
 	if can_buy and Input.is_action_just_pressed("interact") and not has_perk and player.currency >= price:
 		can_buy = false
-		match perk:
-			PERK_TYPE.HP:
-				player.max_health += HEALTH_PERK_BONUS
-				player.health += HEALTH_PERK_BONUS
-				player.perks.append("HP")
-				player.currency 
-			PERK_TYPE.Stamina:
-				player.SPEED += STAMINA_PERK_SPEED
-				player.perks.append("STAMINA")
-			PERK_TYPE.Reload:
-				player.weapon.reload_speed /= 2
-				player.perks.append("RELOAD")
-			PERK_TYPE.DMG:
-				player.weapon.fire_rate /= 2
-				player.weapon.weapon_dmg *= 2
-				player.perks.append("DMG")
-			_:
-				print("buy perk not working")
-		player.buy_perk(price)
+		player.buy_perk(price, self)
 		has_perk = true
 		label.visible = false
 	
 
 func setup_perk() -> void:
-	match perk:
+	match perk_type:
 		PERK_TYPE.HP:
 			price = hp_price
 			#texture

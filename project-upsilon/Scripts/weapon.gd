@@ -119,8 +119,9 @@ func set_weapon_stats() -> void:
 			weapon_dmg = 26
 	var player = get_parent()
 	if player is Player:
-		if player.perks.has("DMG"):
+		if player.perks.has(Perk.PERK_TYPE.DMG):
 			weapon_dmg *= 2
-		if player.perks.has("RELOAD"):
+			fire_rate /= 2
+		if player.perks.has(Perk.PERK_TYPE.Reload):
 			reload_speed /= 2
 		

@@ -21,14 +21,15 @@ const GUN_HOLD_DISTANCE: float = 45
 @onready var gun_pivot: Marker2D = $Pivot/GunPivot
 @onready var hp_label: Label = $CanvasLayer/HP
 @onready var currency_label: Label = $CanvasLayer/Currency
-@onready var weapon: Weapon = $Weapon
+@onready var player: Player = $"."
+@onready var weapon: Weapon = $Weapon1
 const GRENADE = preload("res://Scenes/grenade.tscn")
 @onready var heal_timer: Timer = $HealTimer
 @onready var roll_timer: Timer = $RollTimer
 @onready var grenade_timer: Timer = $GrenadeTimer
 
 #Items
-@onready var perks: Array[String] = []
+@onready var perks: Array[Perk.PERK_TYPE] = []
 
 
 func _ready() -> void:
@@ -37,7 +38,7 @@ func _ready() -> void:
 	
 
 func _process(_delta) -> void:
-	hp_label.text = "HP: " + str(health)
+	pass
 	
 	
 func _physics_process(_delta) -> void:
@@ -94,6 +95,7 @@ func health_regen() -> void:
 		health += REGEN_AMOUNT
 	else:
 		heal_timer.stop()
+	hp_label.text = "HP: " + str(health)
 
 func _on_heal_timer_timeout() -> void:
 	health_regen()
@@ -103,6 +105,7 @@ func _on_heal_timer_timeout() -> void:
 
 func take_damage() -> void:
 	health -= ZOMBIE_DMG
+	hp_label.text = "HP: " + str(health)
 	heal_timer.start(1)
 	
 #=========================================================================
@@ -140,9 +143,32 @@ func currency_zombie_headshot() -> void:
 func currency_zombie_killed() -> void:
 	currency += 100
 	currency_label.text = "$: " + str(currency)
-	
-func buy_perk(price: int) -> void:
-	currency -= price
+
+#=========================================================================
+#Player Currency
+#=========================================================================
+
+func buy_perk(price: int, perk: Perk) -> void:
+	match perk.perk_type:
+		perk.PERK_TYPE.HP:
+			print(perk.HEALTH_PERK_BONUS)
+			max_health += perk.HEALTH_PERK_BONUS
+			health = max_health
+			hp_label.text = "HP: " + str(health)
+			perks.append(perk.perk_type)
+		perk.PERK_TYPE.Stamina:
+			SPEED += perk.STAMINA_PERK_SPEED
+			perks.append(perk.perk_type)
+		perk.PERK_TYPE.Reload:
+			weapon.reload_speed /= 2
+			perks.append(perk.perk_type)
+		perk.PERK_TYPE.DMG:
+			weapon.fire_rate /= 2
+			weapon.weapon_dmg *= 2
+			perks.append(perk.perk_type)
+		_:
+			print("buy perk not working")
+	currency -= perk.price
 	currency_label.text = "$: " + str(currency)
 	
 	
