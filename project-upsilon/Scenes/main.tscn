@@ -31,7 +31,7 @@ position = Vector2(364, -137)
 
 [node name="Spawner" parent="." unique_id=135284612 instance=ExtResource("2_bo1nx")]
 position = Vector2(-361, -266)
-spawn_interval = 10000
+spawn_interval = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=71005758]
 position = Vector2(-50, -133)

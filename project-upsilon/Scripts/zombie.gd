@@ -72,6 +72,11 @@ func follow_player() -> void:
 func take_damage(dmg: float) -> void:
 	health -= dmg
 	hp_label.text = "HP " + str(health)
+	player.currency_zombie_body_hit()
 	if health <= 0:
-		queue_free()
+		zombie_die()
+		
+func zombie_die() -> void:
+	queue_free()
+	player.currency_zombie_killed()
 	

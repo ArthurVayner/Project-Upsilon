@@ -44,7 +44,7 @@ func _process(_delta: float) -> void:
 	if firemode == FIREMODE.AUTO:
 		if Input.is_action_pressed("shoot") and can_shoot and not reloading:
 			shoot()
-
+			
 	if Input.is_action_just_pressed("reload") and max_ammo > 0:
 		reload()
 
@@ -66,8 +66,8 @@ func shoot() -> void:
 
 		
 func reload() -> void:
-	reloading = true
-	reload_timer.start(reload_speed)
+		reloading = true
+		reload_timer.start(reload_speed)
 	
 
 func _on_shoot_timer_timeout() -> void:
@@ -102,22 +102,22 @@ func weapon_rotation() -> void:
 #Create Weapon
 #=================================================================
 func set_weapon_stats() -> void:
-	if weapon_type == WEAPON_TYPE.AK:
-		weapon_sprite.texture = load("res://Assets/Guns/ak-47.png")
-		firemode = FIREMODE.AUTO
-		fire_rate = 1/600.0
-		max_ammo = 320
-		mag_size = 32
-		weapon_dmg = 34
-	elif weapon_type == WEAPON_TYPE.M4:
-		weapon_sprite.texture = load("res://Assets/Guns/m4.png")
-		firemode = FIREMODE.AUTO
-		fire_rate = 1/700.0
-		max_ammo = 400
-		mag_size = 40
-		weapon_dmg = 26
+	match weapon_type:
+		WEAPON_TYPE.AK:
+			weapon_sprite.texture = load("res://Assets/Guns/ak-47.png")
+			firemode = FIREMODE.AUTO
+			fire_rate = 1/600.0
+			max_ammo = 320
+			mag_size = 32
+			weapon_dmg = 34
+		WEAPON_TYPE.M4:
+			weapon_sprite.texture = load("res://Assets/Guns/m4.png")
+			firemode = FIREMODE.AUTO
+			fire_rate = 1/700.0
+			max_ammo = 400
+			mag_size = 40
+			weapon_dmg = 26
 	var player = get_parent()
-	print(player.name)
 	if player is Player:
 		if player.perks.has("DMG"):
 			weapon_dmg *= 2

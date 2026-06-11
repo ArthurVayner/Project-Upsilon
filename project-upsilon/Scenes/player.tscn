@@ -39,12 +39,6 @@ position = Vector2(-19, -55)
 
 [node name="HealTimer" type="Timer" parent="." unique_id=1848193963]
 
-[node name="HP" type="Label" parent="." unique_id=570135672]
-offset_left = -64.0
-offset_top = -148.0
-offset_right = 33.0
-offset_bottom = -125.0
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1452790429]
 zoom = Vector2(0.75, 0.75)
 
@@ -54,6 +48,22 @@ position = Vector2(28, -52)
 [node name="RollTimer" type="Timer" parent="." unique_id=40445337]
 
 [node name="GrenadeTimer" type="Timer" parent="." unique_id=1043901100]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=191825586]
+
+[node name="Currency" type="Label" parent="CanvasLayer" unique_id=1465179504]
+offset_left = 917.0
+offset_top = 28.0
+offset_right = 985.0
+offset_bottom = 51.0
+text = "currency"
+
+[node name="HP" type="Label" parent="CanvasLayer" unique_id=570135672]
+offset_left = 917.0
+offset_top = 5.0
+offset_right = 1014.0
+offset_bottom = 28.0
+text = "health"
 
 [connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]

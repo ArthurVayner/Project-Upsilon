@@ -6,6 +6,7 @@ var max_health: int = 100
 var SPEED: int = 400
 const REGEN_AMOUNT: int = 10
 const ZOMBIE_DMG: int = 50
+var currency: int = 10000
 
 
 #Actions
@@ -18,7 +19,8 @@ const GUN_HOLD_DISTANCE: float = 45
 #Nodes
 @onready var pivot_point: Node2D = $Pivot
 @onready var gun_pivot: Marker2D = $Pivot/GunPivot
-@onready var hp_label: Label = $HP
+@onready var hp_label: Label = $CanvasLayer/HP
+@onready var currency_label: Label = $CanvasLayer/Currency
 @onready var weapon: Weapon = $Weapon
 const GRENADE = preload("res://Scenes/grenade.tscn")
 @onready var heal_timer: Timer = $HealTimer
@@ -31,6 +33,7 @@ const GRENADE = preload("res://Scenes/grenade.tscn")
 
 func _ready() -> void:
 	hp_label.text = "HP: " + str(health)
+	currency_label.text = "$: " + str(currency)
 	
 
 func _process(_delta) -> void:
@@ -120,3 +123,26 @@ func throw_grenade() -> void:
 func _on_grenade_timer_timeout() -> void:
 	can_throw_nade = true
 	weapon.visible = true
+
+
+#=========================================================================
+#Player Currency
+#=========================================================================
+
+func currency_zombie_body_hit() -> void:
+	currency += 10
+	currency_label.text = "$: " + str(currency)
+	
+	
+func currency_zombie_headshot() -> void:
+	pass
+	
+func currency_zombie_killed() -> void:
+	currency += 100
+	currency_label.text = "$: " + str(currency)
+	
+func buy_perk(price: int) -> void:
+	currency -= price
+	currency_label.text = "$: " + str(currency)
+	
+	
